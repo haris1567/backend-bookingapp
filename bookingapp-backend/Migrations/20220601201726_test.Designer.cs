@@ -10,8 +10,8 @@ using bookingapp_backend.Repository;
 namespace bookingapp_backend.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220528205508_models")]
-    partial class models
+    [Migration("20220601201726_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,7 @@ namespace bookingapp_backend.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -72,14 +72,17 @@ namespace bookingapp_backend.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("InitiatorId")
+                    b.Property<int?>("InitiatorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReceiverId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReceiverEmail")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("SentTime")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -101,35 +104,15 @@ namespace bookingapp_backend.Migrations
                     b.Property<string>("Details")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LabId")
                         .HasColumnType("text");
 
-                    b.Property<string>("labId")
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("Labs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateAdded = new DateTime(2022, 5, 29, 1, 55, 7, 577, DateTimeKind.Local).AddTicks(1546),
-                            DateUpdated = new DateTime(2022, 5, 29, 1, 55, 7, 577, DateTimeKind.Local).AddTicks(8947),
-                            Details = "CCNA Lab Remote",
-                            Name = "CCNA",
-                            labId = "ccna"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateAdded = new DateTime(2022, 5, 29, 1, 55, 7, 577, DateTimeKind.Local).AddTicks(9318),
-                            DateUpdated = new DateTime(2022, 5, 29, 1, 55, 7, 577, DateTimeKind.Local).AddTicks(9329),
-                            Details = "CISCO Official Lab",
-                            Name = "CISCO",
-                            labId = "cisco"
-                        });
                 });
 
             modelBuilder.Entity("bookingapp_backend.Models.User", b =>
@@ -184,7 +167,9 @@ namespace bookingapp_backend.Migrations
 
                     b.HasOne("bookingapp_backend.Models.User", null)
                         .WithMany("Bookings")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

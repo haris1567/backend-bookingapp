@@ -26,7 +26,7 @@ namespace bookingapp_backend.Repository
                 new Lab
                 {
                     Id = 1,
-                    labId = "ccna",
+                    LabId = "ccna",
                     Name = "CCNA",
                     Details = "CCNA Lab Remote",
                     DateAdded = DateTime.Now,
@@ -35,7 +35,7 @@ namespace bookingapp_backend.Repository
                 new Lab
                 {
                     Id = 2,
-                    labId = "cisco",
+                    LabId = "cisco",
                     Name = "CISCO",
                     Details = "CISCO Official Lab",
                     DateAdded = DateTime.Now,

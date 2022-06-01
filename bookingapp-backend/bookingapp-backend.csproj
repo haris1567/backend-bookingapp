@@ -6,10 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220528204435_added-models.cs" />
-    <Compile Remove="Migrations\20220528204435_added-models.Designer.cs" />
-    <Compile Remove="Migrations\20220528205126_models.cs" />
-    <Compile Remove="Migrations\20220528205126_models.Designer.cs" />
+    <Compile Remove="Migrations\20220601201519_fixed-lab-issue.cs" />
+    <Compile Remove="Migrations\20220601201519_fixed-lab-issue.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

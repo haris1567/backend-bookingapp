@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Constants;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -62,7 +63,7 @@ namespace bookingapp_backend.Controllers
             var newBooking = await _bookingRepository.Create(
                 new Booking { StartTime = booking.start, EndTime = booking.end, Title = booking.title, UserId = user.Id, LabId = booking.labId });
 
-            var email = _emailService.CreateEmail(booking.email, "Booking Created", newBooking);
+            var email = _emailService.CreateEmail(booking.email, BookingConstants.BookingCreated, newBooking);
 
             try
             {

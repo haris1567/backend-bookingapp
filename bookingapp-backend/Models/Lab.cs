@@ -10,7 +10,7 @@ namespace bookingapp_backend.Models
     {
         [Key]
         public int Id { get; set; }
-        public string labId { get; set; }
+        public string LabId { get; set; }
         public string Name { get; set; }
         public string Details { get; set; }
 

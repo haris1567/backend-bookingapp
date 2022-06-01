@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace bookingapp_backend.Migrations
 {
-    public partial class models : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,9 @@ namespace bookingapp_backend.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Body = table.Column<string>(nullable: true),
-                    ReceiverId = table.Column<int>(nullable: false),
-                    InitiatorId = table.Column<int>(nullable: false),
+                    ReceiverEmail = table.Column<string>(nullable: true),
+                    Subject = table.Column<string>(nullable: true),
+                    InitiatorId = table.Column<int>(nullable: true),
                     SentTime = table.Column<DateTime>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     DateUpdated = table.Column<DateTime>(nullable: false)
@@ -32,7 +33,7 @@ namespace bookingapp_backend.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    labId = table.Column<string>(nullable: true),
+                    LabId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Details = table.Column<string>(nullable: true),
                     DateAdded = table.Column<DateTime>(nullable: false),
@@ -71,7 +72,7 @@ namespace bookingapp_backend.Migrations
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(maxLength: 50, nullable: true),
-                    UserId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
                     LabId = table.Column<int>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     DateUpdated = table.Column<DateTime>(nullable: false)
@@ -90,18 +91,8 @@ namespace bookingapp_backend.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Labs",
-                columns: new[] { "Id", "DateAdded", "DateUpdated", "Details", "Name", "labId" },
-                values: new object[] { 1, new DateTime(2022, 5, 29, 1, 55, 7, 577, DateTimeKind.Local).AddTicks(1546), new DateTime(2022, 5, 29, 1, 55, 7, 577, DateTimeKind.Local).AddTicks(8947), "CCNA Lab Remote", "CCNA", "ccna" });
-
-            migrationBuilder.InsertData(
-                table: "Labs",
-                columns: new[] { "Id", "DateAdded", "DateUpdated", "Details", "Name", "labId" },
-                values: new object[] { 2, new DateTime(2022, 5, 29, 1, 55, 7, 577, DateTimeKind.Local).AddTicks(9318), new DateTime(2022, 5, 29, 1, 55, 7, 577, DateTimeKind.Local).AddTicks(9329), "CISCO Official Lab", "CISCO", "cisco" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_LabId",

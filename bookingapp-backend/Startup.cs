@@ -1,9 +1,11 @@
+using bookingapp_backend.Configurations;
 using bookingapp_backend.Models;
 using bookingapp_backend.Repository;
 using bookingapp_backend.Repository.Implementations;
 using bookingapp_backend.Repository.Interfaces;
 using bookingapp_backend.Services.Implementations;
 using bookingapp_backend.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,9 +15,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace bookingapp_backend
@@ -41,11 +45,27 @@ namespace bookingapp_backend
 
             services.AddScoped<ILoginService, LoginService>();
 
+            //Email Settings
             services.Configure<MailSetting>(Configuration.GetSection("MailSettings"));
             services.AddScoped<IEmailService, EmailService>();
+
+            //Authentication
+            services.Configure<JwtSetting>(Configuration.GetSection("Jwt"));
+            services.Configure<EncryptionKey>(Configuration.GetSection("EncryptionKey"));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
        
-
-
             services.AddDbContext<DBContext>(o=> o.UseMySQL(Configuration.GetConnectionString("Default")));
             services.AddControllers();
 
@@ -80,6 +100,7 @@ namespace bookingapp_backend
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

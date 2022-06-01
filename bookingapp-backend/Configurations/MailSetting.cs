@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace bookingapp_backend.Models
+namespace bookingapp_backend.Configurations
 {
     public class MailSetting
     {

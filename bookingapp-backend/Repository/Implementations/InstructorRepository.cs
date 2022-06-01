@@ -1,6 +1,9 @@
-﻿using bookingapp_backend.Models;
+﻿using bookingapp_backend.Configurations;
+using bookingapp_backend.Helpers;
+using bookingapp_backend.Models;
 using bookingapp_backend.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +14,18 @@ namespace bookingapp_backend.Repository.Implementations
     public class InstructorRepository : IInstructorRepository
     {
         public readonly DBContext dbContext;
-
-        public InstructorRepository(DBContext context)
+        public readonly EncryptionKey _encryptionKey;
+        public InstructorRepository(DBContext context, IOptions<EncryptionKey> encryptionKey)
         {
             dbContext = context;
+            _encryptionKey = encryptionKey.Value;
         }
+        
+        
 
         public async Task<Instructor> Create(Instructor user)
         {
+            user.Password = Security.SecurePassword(user.Password,_encryptionKey.Key);
             user.DateAdded = DateTime.Now;
             user.DateUpdated = user.DateAdded;
 

@@ -8,7 +8,8 @@ namespace bookingapp_backend.Services.Interfaces
 {
     public interface ILoginService
     {
-        public string ConvertPassword(string password);
         public Task<Instructor> CheckLogin(string Uid,string password);
+
+        public string GenerateJwtToken(Instructor instructor);
     }
 }

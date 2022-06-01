@@ -3,6 +3,7 @@ using bookingapp_backend.Models;
 using bookingapp_backend.Repository;
 using bookingapp_backend.Repository.Interfaces;
 using bookingapp_backend.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -81,6 +82,7 @@ namespace bookingapp_backend.Controllers
 
         // PUT api/<BookingController>/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult> Put(int id, [FromBody] Booking booking)
         {
             if (id != booking.Id)
@@ -94,6 +96,7 @@ namespace bookingapp_backend.Controllers
 
         // DELETE api/<BookingController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
             var bookingToDelete = await _bookingRepository.Get(id);

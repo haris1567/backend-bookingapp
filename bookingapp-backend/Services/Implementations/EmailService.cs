@@ -9,6 +9,7 @@ using System.IO;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using bookingapp_backend.Repository.Interfaces;
+using bookingapp_backend.Configurations;
 
 namespace bookingapp_backend.Services.Implementations
 {

@@ -26,7 +26,6 @@ namespace bookingapp_backend
 {
     public class Startup
     {
-        readonly string CorsPolicy = "ApiCorsPolicy";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -69,10 +68,7 @@ namespace bookingapp_backend
        
             services.AddDbContext<DBContext>(o=> o.UseMySQL(Configuration.GetConnectionString("Default")));
 
-            services.AddCors(options => options.AddPolicy(CorsPolicy, builder =>
-                builder.WithOrigins(Configuration["AllowedOrigin"])
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()));
+            services.AddCors();
 
             services.AddControllers();
 

@@ -1,4 +1,5 @@
-﻿using bookingapp_backend.Models;
+﻿using bookingapp_backend.DTOs;
+using bookingapp_backend.Models;
 using bookingapp_backend.Repository;
 using bookingapp_backend.Repository.Interfaces;
 using bookingapp_backend.Services.Interfaces;
@@ -63,7 +64,13 @@ namespace bookingapp_backend.Controllers
             {
                 return NotFound("User not found.");
             }
-            return Ok(_loginService.GenerateJwtToken(loggedInUser));
+
+            JwtModel token = new JwtModel();
+
+            token.idToken = _loginService.GenerateJwtToken(loggedInUser);
+            token.expiresAt = DateTime.Now.AddHours(1);
+
+            return Ok(token);
         }
 
         // PUT api/<InstructorController>/5

@@ -35,7 +35,7 @@ namespace bookingapp_backend.Services.Implementations
         public async Task<Instructor> CheckLogin(string Uid, string password)
         {
             string convertedPassword = Security.SecurePassword(password, _encryptionKey.Key);
-            var instructorInDb = await dbContext.Instructors.FirstOrDefaultAsync(i => i.Uid == Uid && i.Password == convertedPassword);
+            var instructorInDb = await dbContext.Instructors.FirstOrDefaultAsync(i => (i.Uid == Uid ||i.Email == Uid) && i.Password == convertedPassword);
             return instructorInDb ?? null;
         }
 

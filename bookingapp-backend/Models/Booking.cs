@@ -17,6 +17,8 @@ namespace bookingapp_backend.Models
         public string Title { get; set; }
         public int UserId { get; set; }
 
+        public string Uid { get; set; }
+
         public int LabId { get; set; }
 
         public DateTime DateAdded { get; set; }

@@ -10,6 +10,6 @@ namespace bookingapp_backend.Services.Interfaces
     {
        Task SendEmailAsync(Email email);
 
-       Email CreateEmail(string receiverEmail,string subject, Booking booking);
+       Email CreateEmail(string receiverEmail,string receiverName, string subject, Booking booking);
     }
 }

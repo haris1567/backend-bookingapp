@@ -64,7 +64,7 @@ namespace bookingapp_backend.Controllers
             var newBooking = await _bookingRepository.Create(
                 new Booking { StartTime = booking.start, EndTime = booking.end, Title = booking.title, UserId = user.Id, LabId = booking.labId });
 
-            var email = _emailService.CreateEmail(booking.email, BookingConstants.BookingCreated, newBooking);
+            var email = _emailService.CreateEmail(booking.email, user.Name, BookingConstants.BookingCreated, newBooking);
 
             try
             {
@@ -90,7 +90,18 @@ namespace bookingapp_backend.Controllers
                 return BadRequest();
             }
             await _bookingRepository.Update(booking);
+            var user = await _userRepository.Get(booking.UserId);
+            var email = _emailService.CreateEmail(user.Email,user.Name, BookingConstants.BookingUpdated, booking);
 
+            try
+            {
+                await _emailService.SendEmailAsync(email);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"EXCEPTION {ex}");
+            }
             return NoContent();
         }
 
@@ -106,8 +117,19 @@ namespace bookingapp_backend.Controllers
                 return NotFound();
             }
 
+            var user = await _userRepository.Get(bookingToDelete.UserId);
+            var email = _emailService.CreateEmail(user.Email, user.Name, BookingConstants.BookingDeleted, bookingToDelete);
+
             await _bookingRepository.Delete(id);
 
+            try
+            {
+                await _emailService.SendEmailAsync(email);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"EXCEPTION {ex}");
+            }
             return NoContent();
         }
     }

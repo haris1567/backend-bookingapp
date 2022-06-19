@@ -25,12 +25,12 @@ namespace bookingapp_backend.Services.Implementations
             _emailRepository = emailRepository;
         }
 
-        public Email CreateEmail(string receiverEmail, string subject, Booking booking)
+        public Email CreateEmail(string receiverEmail,string receiverName, string subject, Booking booking)
         {
             return new Email
             {
                 ReceiverEmail = receiverEmail,
-                Body = booking.Title,
+                Body = $"Hello {receiverName},<br> Your booking with the title: '{booking.Title}' has been {subject.Substring(subject.IndexOf(' '))}.<br> Regards, <br> CurtinLab Staff",
                 Subject = $"{subject} - {booking.StartTime} :: {booking.EndTime}",
                 SentTime = DateTime.Now,
             };
@@ -39,6 +39,7 @@ namespace bookingapp_backend.Services.Implementations
         public async Task SendEmailAsync(Email emailRequest)
         {
             var email = new MimeMessage();
+            email.From.Add(new MailboxAddress(_emailSettings.DisplayName,_emailSettings.Mail));
             email.Sender = MailboxAddress.Parse(_emailSettings.Mail);
             email.To.Add(MailboxAddress.Parse(emailRequest.ReceiverEmail));
             email.Subject = emailRequest.Subject;

@@ -62,7 +62,7 @@ namespace bookingapp_backend.Controllers
             }
         
             var newBooking = await _bookingRepository.Create(
-                new Booking { StartTime = booking.start, EndTime = booking.end, Title = booking.title, UserId = user.Id, LabId = booking.labId });
+                new Booking { StartTime = booking.start, EndTime = booking.end, Title = booking.title, UserId = user.Id, LabId = booking.labId, Uid = booking.uid });
 
             var email = _emailService.CreateEmail(booking.email, user.Name, BookingConstants.BookingCreated, newBooking);
 

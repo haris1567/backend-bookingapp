@@ -11,6 +11,7 @@ public static class Constants
         public const string BookingUpdated = "Booking Updated";
         public const string BookingDeleted = "Booking Deleted";
 
+        public const int BookingLimit = 4;
 
     }
 }

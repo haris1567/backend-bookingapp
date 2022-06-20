@@ -12,6 +12,8 @@ namespace bookingapp_backend.Repository.Interfaces
 
         Task<Booking> Get(int id);
 
+        Task<IEnumerable<Booking>> Get(DateTime date);
+
         Task<Booking> Create(Booking booking);
 
         Task Update(Booking booking);

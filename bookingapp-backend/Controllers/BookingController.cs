@@ -23,15 +23,17 @@ namespace bookingapp_backend.Controllers
 
         private readonly ILogger<BookingController> _logger;
         private readonly IBookingRepository _bookingRepository;
+        private readonly IBookingService _bookingService;
         private readonly IEmailService _emailService;
         private readonly IUserRepository _userRepository;
 
-        public BookingController(ILogger<BookingController> logger , IBookingRepository bookingRepository,IEmailService emailService,IUserRepository userRepository)
+        public BookingController(ILogger<BookingController> logger , IBookingRepository bookingRepository,IEmailService emailService,IUserRepository userRepository,IBookingService bookingService)
         {
             _logger = logger;
             _bookingRepository = bookingRepository;
             _userRepository = userRepository;
             _emailService = emailService;
+            _bookingService = bookingService;
 
         }
 
@@ -60,9 +62,17 @@ namespace bookingapp_backend.Controllers
             {
                 return BadRequest("The provided user information does not belong to any user");
             }
+
+            var newBooking = new Booking { StartTime = booking.start, EndTime = booking.end, Title = booking.title, UserId = user.Id, LabId = booking.labId, Uid = booking.uid };
+
+            var bookingMessage = _bookingService.IsValidBooking(newBooking);
+
+            if (bookingMessage != null)
+            {
+                return BadRequest(bookingMessage);
+            }
         
-            var newBooking = await _bookingRepository.Create(
-                new Booking { StartTime = booking.start, EndTime = booking.end, Title = booking.title, UserId = user.Id, LabId = booking.labId, Uid = booking.uid });
+            newBooking = await _bookingRepository.Create(newBooking);
 
             var email = _emailService.CreateEmail(booking.email, user.Name, BookingConstants.BookingCreated, newBooking);
 
@@ -89,8 +99,18 @@ namespace bookingapp_backend.Controllers
             {
                 return BadRequest();
             }
+     
+            var bookingMessage = _bookingService.IsValidBooking(booking);
+
+            if (bookingMessage != null)
+            {
+                return BadRequest(bookingMessage);
+            }
+
             await _bookingRepository.Update(booking);
+
             var user = await _userRepository.Get(booking.UserId);
+
             var email = _emailService.CreateEmail(user.Email,user.Name, BookingConstants.BookingUpdated, booking);
 
             try

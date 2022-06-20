@@ -44,6 +44,7 @@ namespace bookingapp_backend
             services.AddScoped<ILabRepository, LabRepository>();
 
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IBookingService, BookingService>();
 
             //Email Settings
             services.Configure<MailSetting>(Configuration.GetSection("MailSettings"));

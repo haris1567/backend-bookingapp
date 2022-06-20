@@ -44,6 +44,10 @@ namespace bookingapp_backend.Repository.Implementations
             return await dbContext.Bookings.FindAsync(id);
         }
 
+        public async Task<IEnumerable<Booking>> Get(DateTime date)
+        {
+            return await dbContext.Bookings.Where(booking => booking.StartTime.DayOfYear == date.DayOfYear).ToListAsync();
+        }
         public async Task Update(Booking booking)
         {
             booking.DateUpdated = DateTime.Now;

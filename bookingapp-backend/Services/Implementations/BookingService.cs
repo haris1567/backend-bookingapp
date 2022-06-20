@@ -26,11 +26,22 @@ namespace bookingapp_backend.Services.Implementations
 
         public async Task<string?> IsValidBooking(Booking currentBooking)
         {
+
+            if (currentBooking.StartTime > currentBooking.EndTime)
+            {
+                return "StartTime cannot be greater than EndTime";
+            }
+
+            if (currentBooking.StartTime < DateTime.UtcNow)
+            {
+                return "A booking in the past cannot be created!";
+            }
+
             var allBookings = await _bookingRepository.Get(currentBooking.StartTime);
 
             var currentUserBookings = allBookings.Where(booking => booking.Uid == currentBooking.Uid);
 
-            var bookingLimitReached = currentUserBookings.ToList().Count > BookingConstants.BookingLimit;
+            var bookingLimitReached = currentUserBookings.ToList().Count >= BookingConstants.BookingLimit;
 
             if (bookingLimitReached)
             {

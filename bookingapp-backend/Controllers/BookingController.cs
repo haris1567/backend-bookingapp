@@ -41,7 +41,7 @@ namespace bookingapp_backend.Controllers
         [HttpGet]
         public async Task<IEnumerable<Booking>> GetBookings()
         {
-            return await _bookingRepository.Get();
+           return await _bookingRepository.Get();   
         }
 
         // GET api/<BookingController>/5
@@ -65,7 +65,7 @@ namespace bookingapp_backend.Controllers
 
             var newBooking = new Booking { StartTime = booking.start, EndTime = booking.end, Title = booking.title, UserId = user.Id, LabId = booking.labId, Uid = booking.uid };
 
-            var bookingMessage = _bookingService.IsValidBooking(newBooking);
+            var bookingMessage = await _bookingService.IsValidBooking(newBooking);
 
             if (bookingMessage != null)
             {
@@ -100,7 +100,7 @@ namespace bookingapp_backend.Controllers
                 return BadRequest();
             }
      
-            var bookingMessage = _bookingService.IsValidBooking(booking);
+            var bookingMessage = await _bookingService.IsValidBooking(booking);
 
             if (bookingMessage != null)
             {

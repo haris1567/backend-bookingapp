@@ -37,9 +37,25 @@ namespace bookingapp_backend.Services.Implementations
                 return "A booking in the past cannot be created!";
             }
 
+            var bookingHours = currentBooking.EndTime.Hour - currentBooking.StartTime.Hour;
+
+            if (bookingHours > BookingConstants.BookingLimit)
+            {
+                return $"A booking can only be created with a maximum of {BookingConstants.BookingLimit} hours.";
+            }
+
             var allBookings = await _bookingRepository.Get(currentBooking.StartTime);
 
             var currentUserBookings = allBookings.Where(booking => booking.Uid == currentBooking.Uid);
+
+            var totalHours = bookingHours;
+
+            currentUserBookings.ToList().ForEach(booking => totalHours += ((int)(booking.EndTime - booking.StartTime).TotalHours));
+
+            if (totalHours > BookingConstants.BookingLimit)
+            {
+                return $"You have exceeded the total number of allowed Booking Hours ({BookingConstants.BookingLimit} hours)";
+            }
 
             var bookingLimitReached = currentUserBookings.ToList().Count >= BookingConstants.BookingLimit;
 
@@ -52,7 +68,7 @@ namespace bookingapp_backend.Services.Implementations
 
             if (isBookingOverlapping)
             {
-                return $"Booking with Range {currentBooking.StartTime} - {currentBooking.EndTime} overlaps with existing Booking.";
+                return $"Booking with Range {currentBooking.StartTime.ToLocalTime()} - {currentBooking.EndTime.ToLocalTime()} overlaps with existing Booking.";
             }
          
             return null;

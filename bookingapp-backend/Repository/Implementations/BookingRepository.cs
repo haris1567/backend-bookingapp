@@ -46,7 +46,7 @@ namespace bookingapp_backend.Repository.Implementations
 
         public async Task<IEnumerable<Booking>> Get(DateTime date)
         {
-            return await dbContext.Bookings.Where(booking => booking.StartTime.DayOfYear == date.DayOfYear).ToListAsync();
+            return await dbContext.Bookings.Where(booking => booking.StartTime >= date.AddHours(-24) && booking.StartTime <= date).ToListAsync();
         }
         public async Task Update(Booking booking)
         {

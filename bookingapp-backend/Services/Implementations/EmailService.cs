@@ -32,7 +32,7 @@ namespace bookingapp_backend.Services.Implementations
                 ReceiverEmail = receiverEmail,
                 Body = $"Hello {receiverName},<br> Your booking with the title: <strong>'{booking.Title}'</strong>" +
                 $" has been <strong>{subject.Substring(subject.IndexOf(' '))}</strong>.<br><br> Regards, <br> CurtinLab Staff",
-                Subject = $"{subject} - {booking.StartTime} :: {booking.EndTime}",
+                Subject = $"{subject} - {booking.StartTime.ToLocalTime()} :: {booking.EndTime.ToLocalTime()}",
                 SentTime = DateTime.Now,
             };
         }

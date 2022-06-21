@@ -68,7 +68,7 @@ namespace bookingapp_backend.Services.Implementations
 
             if (isBookingOverlapping)
             {
-                return $"Booking with Range {currentBooking.StartTime.ToLocalTime()} - {currentBooking.EndTime.ToLocalTime()} overlaps with existing Booking.";
+                return $"Booking with Range {currentBooking.StartTime.ToLocalTime()} - {currentBooking.EndTime.ToLocalTime()} overlaps with an existing Booking.";
             }
          
             return null;

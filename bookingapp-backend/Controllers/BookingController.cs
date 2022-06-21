@@ -99,8 +99,8 @@ namespace bookingapp_backend.Controllers
             {
                 return BadRequest();
             }
-     
-            var bookingMessage = await _bookingService.IsValidBooking(booking);
+
+            var bookingMessage = await _bookingService.IsValidBooking(booking, true);
 
             if (bookingMessage != null)
             {

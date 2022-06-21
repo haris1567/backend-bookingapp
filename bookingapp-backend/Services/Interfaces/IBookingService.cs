@@ -10,6 +10,6 @@ namespace bookingapp_backend.Services.Interfaces
     {
         public DateTime[] CreateBookingSlots();
 
-        public Task<string?> IsValidBooking(Booking booking);
+        public Task<string?> IsValidBooking(Booking booking,bool isInstructor = false);
     }
 }

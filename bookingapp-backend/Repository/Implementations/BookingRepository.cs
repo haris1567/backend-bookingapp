@@ -36,7 +36,7 @@ namespace bookingapp_backend.Repository.Implementations
 
         public async Task<IEnumerable<Booking>> Get()
         {
-            return await dbContext.Bookings.ToListAsync();
+            return await dbContext.Bookings.AsNoTracking().ToListAsync();
         }
 
         public async Task<Booking> Get(int id)
@@ -46,7 +46,7 @@ namespace bookingapp_backend.Repository.Implementations
 
         public async Task<IEnumerable<Booking>> Get(DateTime date)
         {
-            return await dbContext.Bookings.Where(booking => booking.StartTime >= date.AddHours(-24) && booking.StartTime <= date).ToListAsync();
+            return await dbContext.Bookings.Where(booking => booking.StartTime >= date.AddHours(-24) && booking.StartTime <= date).AsNoTracking().ToListAsync();
         }
         public async Task Update(Booking booking)
         {

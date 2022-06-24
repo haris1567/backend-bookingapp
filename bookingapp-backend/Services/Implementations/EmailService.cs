@@ -39,6 +39,8 @@ namespace bookingapp_backend.Services.Implementations
 
         public async Task SendEmailAsync(Email emailRequest)
         {
+            _emailRepository.Create(emailRequest);
+
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress(_emailSettings.DisplayName,_emailSettings.Mail));
             email.Sender = MailboxAddress.Parse(_emailSettings.Mail);

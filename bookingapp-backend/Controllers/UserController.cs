@@ -78,11 +78,5 @@ namespace bookingapp_backend.Controllers
 
             return NoContent();
         }
-
-        [HttpPost("login")]
-        public async Task<ActionResult<Instructor>> LogInInstructor([FromBody] string Uid, string password)
-        {
-            return Ok(await _loginService.CheckLogin(Uid, password));
-        }
     }
 }

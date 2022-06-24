@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20220601201519_fixed-lab-issue.cs" />
-    <Compile Remove="Migrations\20220601201519_fixed-lab-issue.Designer.cs" />
+    <Compile Remove="Migrations\20220624005859_seeds.cs" />
+    <Compile Remove="Migrations\20220624005859_seeds.Designer.cs" />
+    <Compile Remove="Migrations\20220624010038_seeds.cs" />
+    <Compile Remove="Migrations\20220624010038_seeds.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Filters\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

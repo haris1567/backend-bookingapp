@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace bookingapp_backend.Migrations
 {
-    public partial class test : Migration
+    public partial class seeds : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,6 @@ namespace bookingapp_backend.Migrations
                     Body = table.Column<string>(nullable: true),
                     ReceiverEmail = table.Column<string>(nullable: true),
                     Subject = table.Column<string>(nullable: true),
-                    InitiatorId = table.Column<int>(nullable: true),
                     SentTime = table.Column<DateTime>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     DateUpdated = table.Column<DateTime>(nullable: false)
@@ -73,6 +72,7 @@ namespace bookingapp_backend.Migrations
                     EndTime = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(maxLength: 50, nullable: true),
                     UserId = table.Column<int>(nullable: false),
+                    Uid = table.Column<string>(nullable: true),
                     LabId = table.Column<int>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     DateUpdated = table.Column<DateTime>(nullable: false)
@@ -92,6 +92,30 @@ namespace bookingapp_backend.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Labs",
+                columns: new[] { "Id", "DateAdded", "DateUpdated", "Details", "LabId", "Name" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2022, 6, 24, 6, 6, 16, 518, DateTimeKind.Local).AddTicks(3943), new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(1198), "CCNA Lab Remote", "ccna", "CCNA" },
+                    { 2, new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(2100), new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(2128), "CISCO Official Lab", "cisco", "CISCO" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "DateAdded", "DateUpdated", "Email", "Name", "Role", "Uid", "Password" },
+                values: new object[] { 4, new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(6242), new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(6251), "harisali808+instructor@hotmail.com", "Haris Ali", 1, "admin", "NFPXWx9MXvRwj/lDmsGQUNL65bQ8tbsRdVgFzNPJTAM=" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "DateAdded", "DateUpdated", "Email", "Name", "Role", "Uid" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(3532), new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4034), "18895045@student.curtin.edu.au", "Haris", 0, "18895045" },
+                    { 2, new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4574), new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4592), "harisali808@hotmail.com", "Ali", 0, "12345678" },
+                    { 3, new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4610), new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4611), "harisali808@gmail.com", "Muhammad", 0, "87654321" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -10,8 +10,8 @@ using bookingapp_backend.Repository;
 namespace bookingapp_backend.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220601201726_test")]
-    partial class test
+    [Migration("20220624010617_seeds")]
+    partial class seeds
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,9 @@ namespace bookingapp_backend.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("Uid")
+                        .HasColumnType("text");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -71,9 +74,6 @@ namespace bookingapp_backend.Migrations
 
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime");
-
-                    b.Property<int?>("InitiatorId")
-                        .HasColumnType("int");
 
                     b.Property<string>("ReceiverEmail")
                         .HasColumnType("text");
@@ -113,6 +113,26 @@ namespace bookingapp_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Labs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 518, DateTimeKind.Local).AddTicks(3943),
+                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(1198),
+                            Details = "CCNA Lab Remote",
+                            LabId = "ccna",
+                            Name = "CCNA"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(2100),
+                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(2128),
+                            Details = "CISCO Official Lab",
+                            LabId = "cisco",
+                            Name = "CISCO"
+                        });
                 });
 
             modelBuilder.Entity("bookingapp_backend.Models.User", b =>
@@ -145,6 +165,38 @@ namespace bookingapp_backend.Migrations
                     b.ToTable("Users");
 
                     b.HasDiscriminator<int>("Role").HasValue(0);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(3532),
+                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4034),
+                            Email = "18895045@student.curtin.edu.au",
+                            Name = "Haris",
+                            Role = 0,
+                            Uid = "18895045"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4574),
+                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4592),
+                            Email = "harisali808@hotmail.com",
+                            Name = "Ali",
+                            Role = 0,
+                            Uid = "12345678"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4610),
+                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4611),
+                            Email = "harisali808@gmail.com",
+                            Name = "Muhammad",
+                            Role = 0,
+                            Uid = "87654321"
+                        });
                 });
 
             modelBuilder.Entity("bookingapp_backend.Models.Instructor", b =>
@@ -155,6 +207,19 @@ namespace bookingapp_backend.Migrations
                         .HasColumnType("text");
 
                     b.HasDiscriminator().HasValue(1);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 4,
+                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(6242),
+                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(6251),
+                            Email = "harisali808+instructor@hotmail.com",
+                            Name = "Haris Ali",
+                            Role = 1,
+                            Uid = "admin",
+                            Password = "NFPXWx9MXvRwj/lDmsGQUNL65bQ8tbsRdVgFzNPJTAM="
+                        });
                 });
 
             modelBuilder.Entity("bookingapp_backend.Models.Booking", b =>

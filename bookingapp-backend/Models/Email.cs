@@ -17,8 +17,6 @@ namespace bookingapp_backend.Models
 
         public string Subject { get; set; }
 
-        public int? InitiatorId { get; set; }
-
         public DateTime SentTime { get; set; }
 
         public DateTime DateAdded { get; set; }

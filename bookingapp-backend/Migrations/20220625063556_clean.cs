@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace bookingapp_backend.Migrations
 {
-    public partial class first : Migration
+    public partial class clean : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -98,23 +98,23 @@ namespace bookingapp_backend.Migrations
                 columns: new[] { "Id", "DateAdded", "DateUpdated", "Details", "LabId", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 6, 25, 6, 59, 6, 457, DateTimeKind.Local).AddTicks(3871), new DateTime(2022, 6, 25, 6, 59, 6, 458, DateTimeKind.Local).AddTicks(1272), "CCNA Lab Remote", "ccna", "CCNA" },
-                    { 2, new DateTime(2022, 6, 25, 6, 59, 6, 458, DateTimeKind.Local).AddTicks(1630), new DateTime(2022, 6, 25, 6, 59, 6, 458, DateTimeKind.Local).AddTicks(1640), "CISCO Official Lab", "cisco", "CISCO" }
+                    { 1, new DateTime(2022, 6, 25, 11, 35, 56, 165, DateTimeKind.Local).AddTicks(5526), new DateTime(2022, 6, 25, 11, 35, 56, 166, DateTimeKind.Local).AddTicks(2235), "CCNA Lab Remote", "ccna", "CCNA" },
+                    { 2, new DateTime(2022, 6, 25, 11, 35, 56, 166, DateTimeKind.Local).AddTicks(2597), new DateTime(2022, 6, 25, 11, 35, 56, 166, DateTimeKind.Local).AddTicks(2608), "CISCO Official Lab", "cisco", "CISCO" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "DateAdded", "DateUpdated", "Email", "Name", "Role", "Uid", "Password" },
-                values: new object[] { 4, new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(4411), new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(4416), "harisali808+instructor@hotmail.com", "Haris Ali", 1, "admin", "NFPXWx9MXvRwj/lDmsGQUNL65bQ8tbsRdVgFzNPJTAM=" });
+                values: new object[] { 4, new DateTime(2022, 6, 25, 11, 35, 56, 167, DateTimeKind.Local).AddTicks(3565), new DateTime(2022, 6, 25, 11, 35, 56, 167, DateTimeKind.Local).AddTicks(3569), "harisali808+instructor@hotmail.com", "Haris Ali", 1, "admin", "NFPXWx9MXvRwj/lDmsGQUNL65bQ8tbsRdVgFzNPJTAM=" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "DateAdded", "DateUpdated", "Email", "Name", "Role", "Uid" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3015), new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3275), "18895045@student.curtin.edu.au", "Haris", 0, "18895045" },
-                    { 2, new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3570), new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3579), "harisali808@hotmail.com", "Ali", 0, "12345678" },
-                    { 3, new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3589), new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3590), "harisali808@gmail.com", "Muhammad", 0, "87654321" }
+                    { 1, new DateTime(2022, 6, 25, 11, 35, 56, 167, DateTimeKind.Local).AddTicks(2278), new DateTime(2022, 6, 25, 11, 35, 56, 167, DateTimeKind.Local).AddTicks(2529), "18895045@student.curtin.edu.au", "Haris", 0, "18895045" },
+                    { 2, new DateTime(2022, 6, 25, 11, 35, 56, 167, DateTimeKind.Local).AddTicks(2815), new DateTime(2022, 6, 25, 11, 35, 56, 167, DateTimeKind.Local).AddTicks(2825), "harisali808@hotmail.com", "Ali", 0, "12345678" },
+                    { 3, new DateTime(2022, 6, 25, 11, 35, 56, 167, DateTimeKind.Local).AddTicks(2833), new DateTime(2022, 6, 25, 11, 35, 56, 167, DateTimeKind.Local).AddTicks(2834), "harisali808@gmail.com", "Muhammad", 0, "87654321" }
                 });
 
             migrationBuilder.CreateIndex(

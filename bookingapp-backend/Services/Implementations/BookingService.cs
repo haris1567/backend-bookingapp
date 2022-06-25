@@ -38,7 +38,7 @@ namespace bookingapp_backend.Services.Implementations
                 return errorMessage;
             }
 
-            var bookingHours = currentBooking.EndTime.Hour - currentBooking.StartTime.Hour;
+            var bookingHours = (currentBooking.EndTime - currentBooking.StartTime).TotalHours;
 
             if (bookingHours > BookingConstants.BookingLimit)
             {
@@ -55,8 +55,9 @@ namespace bookingapp_backend.Services.Implementations
 
             if (totalHours > BookingConstants.BookingLimit && !isInstructor)
             {
+                var allowedHours = BookingConstants.BookingLimit - (totalHours - bookingHours);
                 var errorMessage = $"You have exceeded the total number of allowed Booking Hours ({BookingConstants.BookingLimit} hours).";
-                errorMessage = totalHours - bookingHours > 0 ? errorMessage + $" For today, you can make a booking of {totalHours - bookingHours} hours" : errorMessage;
+                errorMessage = allowedHours > 0 ? errorMessage + $" For today, you can make a booking of {allowedHours} hours" : errorMessage;
                 return errorMessage;
             }
 

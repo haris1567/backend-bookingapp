@@ -34,7 +34,8 @@ namespace bookingapp_backend.Services.Implementations
 
             if (currentBooking.StartTime < DateTime.UtcNow)
             {
-                return "A booking in the past cannot be created!";
+                var errorMessage = currentBooking.Id > 0 ? "Booking must be updated to a future Date and Time" : "A booking cannot be created in the past!";
+                return errorMessage;
             }
 
             var bookingHours = currentBooking.EndTime.Hour - currentBooking.StartTime.Hour;
@@ -54,7 +55,9 @@ namespace bookingapp_backend.Services.Implementations
 
             if (totalHours > BookingConstants.BookingLimit && !isInstructor)
             {
-                return $"You have exceeded the total number of allowed Booking Hours ({BookingConstants.BookingLimit} hours)";
+                var errorMessage = $"You have exceeded the total number of allowed Booking Hours ({BookingConstants.BookingLimit} hours).";
+                errorMessage = totalHours - bookingHours > 0 ? errorMessage + $" For today, you can make a booking of {totalHours - bookingHours} hours" : errorMessage;
+                return errorMessage;
             }
 
             var bookingLimitReached = currentUserBookings.ToList().Count >= BookingConstants.BookingLimit;

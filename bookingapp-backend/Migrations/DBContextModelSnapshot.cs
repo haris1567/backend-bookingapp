@@ -21,7 +21,6 @@ namespace bookingapp_backend.Migrations
             modelBuilder.Entity("bookingapp_backend.Models.Booking", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateAdded")
@@ -116,8 +115,8 @@ namespace bookingapp_backend.Migrations
                         new
                         {
                             Id = 1,
-                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 518, DateTimeKind.Local).AddTicks(3943),
-                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(1198),
+                            DateAdded = new DateTime(2022, 6, 25, 6, 59, 6, 457, DateTimeKind.Local).AddTicks(3871),
+                            DateUpdated = new DateTime(2022, 6, 25, 6, 59, 6, 458, DateTimeKind.Local).AddTicks(1272),
                             Details = "CCNA Lab Remote",
                             LabId = "ccna",
                             Name = "CCNA"
@@ -125,8 +124,8 @@ namespace bookingapp_backend.Migrations
                         new
                         {
                             Id = 2,
-                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(2100),
-                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 520, DateTimeKind.Local).AddTicks(2128),
+                            DateAdded = new DateTime(2022, 6, 25, 6, 59, 6, 458, DateTimeKind.Local).AddTicks(1630),
+                            DateUpdated = new DateTime(2022, 6, 25, 6, 59, 6, 458, DateTimeKind.Local).AddTicks(1640),
                             Details = "CISCO Official Lab",
                             LabId = "cisco",
                             Name = "CISCO"
@@ -168,8 +167,8 @@ namespace bookingapp_backend.Migrations
                         new
                         {
                             Id = 1,
-                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(3532),
-                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4034),
+                            DateAdded = new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3015),
+                            DateUpdated = new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3275),
                             Email = "18895045@student.curtin.edu.au",
                             Name = "Haris",
                             Role = 0,
@@ -178,8 +177,8 @@ namespace bookingapp_backend.Migrations
                         new
                         {
                             Id = 2,
-                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4574),
-                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4592),
+                            DateAdded = new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3570),
+                            DateUpdated = new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3579),
                             Email = "harisali808@hotmail.com",
                             Name = "Ali",
                             Role = 0,
@@ -188,8 +187,8 @@ namespace bookingapp_backend.Migrations
                         new
                         {
                             Id = 3,
-                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4610),
-                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(4611),
+                            DateAdded = new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3589),
+                            DateUpdated = new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(3590),
                             Email = "harisali808@gmail.com",
                             Name = "Muhammad",
                             Role = 0,
@@ -210,8 +209,8 @@ namespace bookingapp_backend.Migrations
                         new
                         {
                             Id = 4,
-                            DateAdded = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(6242),
-                            DateUpdated = new DateTime(2022, 6, 24, 6, 6, 16, 522, DateTimeKind.Local).AddTicks(6251),
+                            DateAdded = new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(4411),
+                            DateUpdated = new DateTime(2022, 6, 25, 6, 59, 6, 459, DateTimeKind.Local).AddTicks(4416),
                             Email = "harisali808+instructor@hotmail.com",
                             Name = "Haris Ali",
                             Role = 1,

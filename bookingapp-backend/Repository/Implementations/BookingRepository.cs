@@ -21,6 +21,16 @@ namespace bookingapp_backend.Repository.Implementations
         {
             booking.DateAdded = DateTime.Now;
             booking.DateUpdated = booking.DateAdded;
+            var lastBooking = await dbContext.Bookings.OrderByDescending(b => b.DateAdded).FirstOrDefaultAsync();
+
+            if (lastBooking != null && lastBooking.Id > 0)
+            {
+                booking.Id = lastBooking.Id + 1;
+            }
+            else
+            {
+                booking.Id = 1;
+            }
 
             dbContext.Bookings.Add(booking);
             await dbContext.SaveChangesAsync();

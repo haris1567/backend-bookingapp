@@ -56,7 +56,7 @@ namespace bookingapp_backend.Repository.Implementations
 
         public async Task<IEnumerable<Booking>> Get(DateTime date)
         {
-            return await dbContext.Bookings.Where(booking => booking.StartTime >= date.AddHours(-24) && booking.StartTime <= date).AsNoTracking().ToListAsync();
+            return await dbContext.Bookings.Where(booking => booking.StartTime >= date.AddHours(-12) && booking.StartTime <= date.AddHours(12)).AsNoTracking().ToListAsync();
         }
         public async Task Update(Booking booking)
         {

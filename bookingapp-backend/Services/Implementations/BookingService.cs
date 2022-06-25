@@ -27,9 +27,9 @@ namespace bookingapp_backend.Services.Implementations
         public async Task<string?> IsValidBooking(Booking currentBooking, bool isInstructor = false)
         {
 
-            if (currentBooking.StartTime > currentBooking.EndTime)
+            if (currentBooking.StartTime >= currentBooking.EndTime)
             {
-                return "StartTime cannot be greater than EndTime";
+                return "StartTime must be less than EndTime";
             }
 
             if (currentBooking.StartTime < DateTime.UtcNow)
@@ -64,7 +64,7 @@ namespace bookingapp_backend.Services.Implementations
                 return "Maximum Booking Limit Reached for Today!";
             }
 
-            var isBookingOverlapping = allBookings.ToList().Any(booking => booking.Uid != currentBooking.Uid && IsBookingOverlapped(currentBooking.StartTime, currentBooking.EndTime, booking.StartTime, booking.EndTime));
+            var isBookingOverlapping = allBookings.ToList().Any(booking => booking.Id != currentBooking.Id && IsBookingOverlapped(currentBooking.StartTime, currentBooking.EndTime, booking.StartTime, booking.EndTime));
 
             if (isBookingOverlapping)
             {
